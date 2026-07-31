@@ -76,6 +76,23 @@ OryxOS 是基于 Java 21 / Spring Boot 3.x 的 Agent 运行时。目标端到端
 - 沙箱白名单：`oryxos.sandbox.file.allowed-roots`、`oryxos.sandbox.shell.allowed-commands`（默认 `echo,pwd,ls`）、`oryxos.sandbox.http.allowed-domains`（默认 `httpbin.org,api.github.com`）。
 - `oryxos.react.max-iterations`（默认 `10`）。
 
+### Provider 选择（真实 LLM vs Mock）
+
+由 `ORYXOS_PROVIDER`（→ `oryxos.provider.default-provider`）通过 `@ConditionalOnProperty` 控制，两个 `ChatProvider` Bean 互斥：
+
+| `ORYXOS_PROVIDER` | 激活的 Bean | 行为 |
+|--------------------|-------------|------|
+| `mock`（默认） | `MockChatProvider` | 返回 `[mock:<model>] <消息>` 占位内容 |
+| `anthropic` | `AnthropicProvider` | 真实调用 Anthropic-compatible Messages API |
+
+`AnthropicProvider` 通过三个环境变量配置（绑定到 `LlmProviderProperties`，前缀 `oryxos.provider.llm`）：
+
+- `LLM_API_KEY`：中转站 API Key（必填，启用真实 provider 时）
+- `LLM_BASE_URL`：中转站地址（必填，不含尾部斜杠；provider 自动拼接 `/v1/messages`）
+- `LLM_MODEL`：模型名（可选，默认 `claude-opus-4-8`）
+
+`ChatResponse` 带 `Status` 枚举（`SUCCESS` / `CONFIG_ERROR` / `SERVICE_ERROR` / `INVALID_INPUT`）和中文 `errorMessage`，失败时返回中文提示而非模拟内容。凭证只存在内存和 HTTP 请求头，不进日志/异常/审计记录（`AuditRepository.recordLlmCall` 只记 provider/model/耗时）。测试通过 `LlmHttpClient` 接口（隔离 JDK `HttpClient`，便于在 Java 26 上 mock）注入 stub。
+
 ### 持久化的坑
 
 `db/migration/V1__init.sql` 迁移脚本存在，但 **Flyway 被禁用**（`spring.flyway.enabled: false`）。`SessionRepository` 用 `CREATE TABLE IF NOT EXISTS` 自建表（`sessions`、`tool_invocations`、`llm_calls`、`agent_executions`）。修改 schema 时要**两处同步**改动（或有意重新启用 Flyway）。
@@ -88,10 +105,9 @@ OryxOS 是基于 Java 21 / Spring Boot 3.x 的 Agent 运行时。目标端到端
 
 骨架能编译，API/CLI 冒烟测试通过，但 Agent 循环尚未完成。不要假设以下功能端到端可用：
 
-- `ReactLoop` 是**单次调用**：仅在 system prompt 里列出工具名，调用 provider 一次，**不**解析工具调用、**不**调用 `ToolRegistry.find(...)`、**不**观察结果、**不**按 `max_iterations` 循环。`ToolCall` 类存在但运行时未使用。
-- `ReactLoop` 忽略 `AgentDefinition.instructions`、`identity.prompt` 和 bootstrap 文件——这些被解析了但未进入 prompt。
+- `ReactLoop` 是**单次调用**：列出工具名、注入 agent instructions/identity prompt + 中文输出指令、调用 provider 一次，但**不**解析工具调用、**不**调用 `ToolRegistry.find(...)`、**不**观察结果、**不**按 `max_iterations` 循环。`ToolCall` 类存在但运行时未使用。
 - 工具暴露**不**按 `profile.tools()` 过滤——所有已注册工具名都会被广告出去。
-- Provider 选择**未**接线：`Profile.providerName()` 和 `oryxos.provider.default-provider` 被解析，但 `ReactLoop` 直接用唯一注入的 `ChatProvider` Bean。新增第二个 provider 需要引入 registry/qualifier。
+- Provider 选择**已接线**：`ORYXOS_PROVIDER=mock`（默认）/`anthropic` 通过 `@ConditionalOnProperty` 互斥激活 `MockChatProvider` / `AnthropicProvider`，详见上节"Provider 选择"。新增第三个 provider 需引入 registry/qualifier。
 - `POST /api/v1/sessions/{id}/messages`（`SessionController`）绕过 `AgentService`/`ReactLoop`，返回硬编码的 `[mock:session] ...` 字符串。
 - `ShellTool` 通过 `bash -lc` 执行，`SandboxPolicy.checkCommand` 只检查**首个空白分隔 token**，因此白名单只能视为粗粒度防护，不是硬化安全边界。
 - `profile delete` 与 `gateway` 是有意留的桩。

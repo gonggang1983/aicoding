@@ -12,6 +12,10 @@ oryxos:
     path: ${ORYXOS_SQLITE_PATH:${ORYXOS_WORKSPACE:.oryxos}/sessions/oryxos.db}
   provider:
     default-provider: ${ORYXOS_PROVIDER:mock}
+    llm:
+      api-key: ${LLM_API_KEY:}
+      base-url: ${LLM_BASE_URL:}
+      model: ${LLM_MODEL:claude-opus-4-8}
   react:
     max-iterations: 10
   sandbox:

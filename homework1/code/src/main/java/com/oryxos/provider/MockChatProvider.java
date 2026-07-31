@@ -1,10 +1,12 @@
 package com.oryxos.provider;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(name = "oryxos.provider.default-provider", havingValue = "mock", matchIfMissing = true)
 public class MockChatProvider implements ChatProvider {
     @Override
     public String name() {
@@ -18,6 +20,6 @@ public class MockChatProvider implements ChatProvider {
                 .reduce((first, second) -> second)
                 .map(ChatMessage::content)
                 .orElse("");
-        return new ChatResponse("[mock:" + model + "] " + userMessage, name(), model);
+        return ChatResponse.success("[mock:" + model + "] " + userMessage, name(), model);
     }
 }
