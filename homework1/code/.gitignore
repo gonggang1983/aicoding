@@ -1,0 +1,10 @@
+# OryxOS code artifacts
+
+target/
+.oryxos/
+*.log
+*.tmp
+.idea/
+.vscode/
+*.iml
+.DS_Store

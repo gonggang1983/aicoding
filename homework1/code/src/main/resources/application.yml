@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: oryxos
+  flyway:
+    enabled: false
+
+oryxos:
+  version: 0.1.0-SNAPSHOT
+  workspace:
+    path: ${ORYXOS_WORKSPACE:.oryxos}
+  sqlite:
+    path: ${ORYXOS_SQLITE_PATH:${ORYXOS_WORKSPACE:.oryxos}/sessions/oryxos.db}
+  provider:
+    default-provider: ${ORYXOS_PROVIDER:mock}
+  react:
+    max-iterations: 10
+  sandbox:
+    file:
+      allowed-roots:
+        - ${ORYXOS_WORKSPACE:.oryxos}
+    shell:
+      allowed-commands:
+        - echo
+        - pwd
+        - ls
+    http:
+      allowed-domains:
+        - httpbin.org
+        - api.github.com
+
+server:
+  port: ${ORYXOS_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
