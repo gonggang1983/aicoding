@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,7 @@ public class AnthropicProvider implements ChatProvider {
     private final LlmHttpClient httpClient;
     private final ObjectMapper objectMapper;
 
+    @Autowired
     public AnthropicProvider(LlmProviderProperties properties) {
         this(properties,
                 LlmHttpClient.fromJdkClient(java.net.http.HttpClient.newBuilder()

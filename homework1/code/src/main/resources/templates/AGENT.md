@@ -5,8 +5,8 @@ identity:
   agent_name: {{name}}
   prompt: You are a helpful OryxOS agent.
 provider:
-  name: mock
-  model: mock-chat
+  name: anthropic
+  model: claude-opus-4-8
   temperature: 0.2
 tools:
   - recall_memory

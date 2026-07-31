@@ -26,7 +26,7 @@ class AgentLoaderTest {
         AgentDefinition definition = loader.load("demo");
 
         assertThat(definition.profile().name()).isEqualTo("demo");
-        assertThat(definition.profile().providerName()).isEqualTo("mock");
+        assertThat(definition.profile().providerName()).isEqualTo("anthropic");
         assertThat(definition.profile().tools()).contains("recall_memory", "save_memory", "http_get");
         assertThat(definition.instructions()).contains("OryxOS");
     }
