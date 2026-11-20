@@ -1,0 +1,37 @@
+{
+  "recordType": "normalized transcription of tool output; identical rows factored across two runs",
+  "mode": "strict-share-read-only",
+  "utc": "2026-11-16T02:57:16.1328753Z",
+  "os": "10.0.26200.0",
+  "processBits": 64,
+  "powershell": "5.1.26100.9711",
+  "sourceSha256": "653BEF53FB5BE999541797704F6B7924269162DE8782F0B1C1BAB4BEBE776658",
+  "runs": [
+    { "rootBasename": "g03-probe-14f9993536ee4eba9ed1430ebe45b1d0-ascii", "artifactsRemoved": true },
+    { "rootBasename": "g03-probe-b1e132ddc69b411d957dcf888e4a446b-中文 space", "artifactsRemoved": true }
+  ],
+  "rowsSharedByBothRuns": [
+    "strict_pin_rejects_prior_writer | PASS | Win32=32",
+    "strict_relative_directory | PASS | NTSTATUS=0x00000000",
+    "strict_pin_rejects_new_writer | PASS | Win32=32; FSCTL not issued without writable handle",
+    "strict_stage_fresh-stage.tmp | PASS | NTSTATUS=0x00000000",
+    "strict_write_fresh-stage.tmp | PASS | bytes=23",
+    "strict_publish_fresh.md | FAIL_OR_BLOCKED | NTSTATUS=0xC0000043",
+    "strict_handle_cleanup_fresh-stage.tmp | PASS | Win32=0",
+    "strict_stage_collision-stage.tmp | PASS | NTSTATUS=0x00000000",
+    "strict_write_collision-stage.tmp | PASS | bytes=23",
+    "strict_publish_existing.md | FAIL_OR_BLOCKED | NTSTATUS=0xC0000043",
+    "strict_handle_cleanup_collision-stage.tmp | PASS | Win32=0",
+    "strict_existing_sentinel | PASS | old bytes preserved",
+    "strict_fresh_bytes | FAIL_OR_BLOCKED | fresh destination verified after handles close",
+    "strict_outside_empty | PASS | synthetic outside only",
+    "strict_reparse_positive_control | PASS | Win32=0",
+    "strict_reparse_control_removed | PASS | Win32=0"
+  ],
+  "limitations": [
+    "No real DSH host",
+    "No full volume-to-target chain proof",
+    "No cancellation or crash injection",
+    "No concurrent multi-process publication stress"
+  ]
+}

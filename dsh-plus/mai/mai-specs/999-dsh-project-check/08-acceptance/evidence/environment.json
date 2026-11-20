@@ -1,0 +1,59 @@
+{
+  "feature": "999-dsh-project-check",
+  "stage": "08-acceptance",
+  "observationClock": "2026-11-19T18:28:18.4864326+08:00",
+  "clockSource": "Local Get-Date output; not an external time attestation",
+  "platform": "win32",
+  "arch": "x64",
+  "node": "v24.18.0",
+  "npm": "11.16.0",
+  "git": "2.55.0.windows.2",
+  "workspaceHead": "ebdaabbc1e915b47a7a46294bdef6c8b3ecfda15",
+  "workspaceCaveat": "Plugin source/specs are untracked; HEAD alone does not identify plugin contents. Existing root .gitignore has 3 tracked unstaged added lines, untouched by this acceptance run.",
+  "testedScope": {
+    "files": 38,
+    "sha256": "2c2a9f2a10ccb7739b10bf4d10a6a700a90ebb0128b572f4c6364357ef1df415",
+    "includes": ["src/**", "tests/**", "package.json", "package-lock.json", "tsconfig.json", "cordis.patch.example.yml", "README.md"],
+    "algorithm": "Sort relative forward-slash paths with JS default sort. Hash concatenated path + NUL + lower-case file SHA256 hex + LF using SHA256. Excludes dist, node_modules and specs. README later updated with acceptance outcome."
+  },
+  "sourceAndTests": {
+    "files": 33,
+    "sha256": "2c18f4c2ef6df240fa0c29a96bab1cf583410b5bb135c352bbfc2449dc471560",
+    "algorithm": "Same aggregation algorithm; only recursive src and tests files, including the packaging test although packaging was not rerun."
+  },
+  "observedSHA256": {
+    "package-lock.json": "d1219cbb541bd942013ba25b857016f05f90fd323909b73a2340b421eb1d9c55",
+    "node_modules/@deepseek-ai/dsh/package.json": "b39b22222238db8168ad1285251088b270fdedc6d11b7bdaf432b8b59d6880c7",
+    "node_modules/@deepseek-ai/dsh/lib/bin.js": "36f86742e0c3cc1c3b2dbaa6582ee00b0c37bc4f5a190f7531b5303bf3efb6d9",
+    "node_modules/@deepseek-ai/dsh-sandbox-local/lib/index.js": "3557bb25aaabd8c860055b767aeede31b5cd41600c37d2e5fda361e209705eb1",
+    "node_modules/@deepseek-ai/dsh-subprocess-local/lib/index.js": "152b009a77e0b5f846af5a86b25a35346c9aca5f380c82054a35bde722500752"
+  },
+  "installedPackages": [
+    {"name": "@deepseek-ai/dsh", "version": "0.2.2-rc.3", "gitHead": null},
+    {"name": "@deepseek-ai/cordis", "version": "4.1.0", "gitHead": null},
+    {"name": "@deepseek-ai/dsh-sandbox-local", "version": "0.2.2-rc.3", "gitHead": null},
+    {"name": "@deepseek-ai/dsh-subprocess-local", "version": "0.2.2-rc.3", "gitHead": null}
+  ],
+  "dshLockIntegrity": "sha512-S+4oUYVKWuc1SCMMp1mpUa2llxVy0o9gIgp7TDg/Ea7PuvXVkAfnykqSH1/oDXVB+y5VzEm0QIJulo1LIB3qRg==",
+  "provenance": "Hashes identify inspected local files only. No proof that the registry distribution corresponds to design SHA 39163dd30f703a79079e2d2446545cff3c453738; lock integrity is recorded, not newly verified by reinstalling.",
+  "pathDshCommandFound": false,
+  "localDshCmdExists": true,
+  "dshHomeEnvironmentVariablePresent": false,
+  "personalConfigurationRead": false,
+  "credentialsReadOrConfigured": false,
+  "interactiveHostLaunched": false,
+  "interactiveHostConnectionProvided": false,
+  "uiOrBrowserControlAvailableToAgent": false,
+  "newInstallationPerformed": false,
+  "sandboxProbeMode": "read-only",
+  "sandboxProbeEnforcement": "partial",
+  "deploymentRequireFullEnforcement": true,
+  "deploymentPolicyLowered": false,
+  "configurationCaveat": "Missing DSH_HOME variable and missing PATH command do not prove that the user has no DSH configuration or runnable local CLI.",
+  "cleanupObservation": {
+    "dshGitPluginRuntimePackDirectoriesObservedAfterRun": 0,
+    "olderDirectoriesNotDeleted": ["dsh-check-4KXakG", "dsh-check-6opn21", "dsh-check-aH8eIx", "dsh-check-bziGvm", "dsh-check-G0bWRx", "dsh-check-zgaySY", "dsh-spill-L59KFD"],
+    "olderDirectoryCreationDateUTC": "2026-11-18",
+    "caveat": "Only names and timestamps inspected, not contents. No pre-run directory set captured this time; no exhaustive zero-residue claim. Unknown old directories were not deleted."
+  }
+}

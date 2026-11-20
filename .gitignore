@@ -1,3 +1,6 @@
 /.claude
 /.specify
 /.idea
+*.toml
+.continue/prompts/mai.prompt
+.mcp.json

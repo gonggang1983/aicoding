@@ -1,0 +1,33 @@
+{
+  "name": "dsh-project-check",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./dist/index.js",
+  "files": ["dist", "README.md", "cordis.patch.example.yml"],
+  "engines": { "node": ">=24.9.0" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "node --test tests/*.test.mjs",
+    "test:package": "npm run build && node --test tests/packaging/*.test.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-user-approval": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-fs": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-subprocess": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-sandbox": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-sandbox-policy": "0.2.2-rc.3"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-fs-local": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-subprocess-local": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-sandbox-local": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.2-rc.3",
+    "@types/node": "24.13.5",
+    "typescript": "6.0.3"
+  }
+}

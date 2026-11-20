@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "initialFiles": [
+    "BRIEF.md",
+    "context/_INDEX.md"
+  ],
+  "artifacts": [
+    {
+      "id": "prd",
+      "path": "02-prd/PRD.md",
+      "skill": "my-create-prd"
+    },
+    {
+      "id": "design",
+      "path": "03-design/TECH_DESIGN.md",
+      "skill": "my-create-design"
+    },
+    {
+      "id": "design-review",
+      "path": "04-design-review/design_review.md",
+      "skill": "my-review-design"
+    },
+    {
+      "id": "test-plan",
+      "path": "05-test-plan/TEST_PLAN.md",
+      "skill": "my-create-test-plan"
+    },
+    {
+      "id": "code-review",
+      "path": "07-code-review/code_review.md",
+      "skill": "my-review-code"
+    }
+  ]
+}

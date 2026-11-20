@@ -1,0 +1,11 @@
+# Deployment overlay, not an auto-activating bundle. Replace every placeholder.
+# Use absolute execution-world paths with forward slashes; do not put secrets here.
+# Keep the host's existing fs/approval/sandbox services and permission policies.
+- insert:
+    - id: dsh-project-check
+      name: 'C:/REPLACE/plugin/node_modules/dsh-project-check/dist/index.js'
+      config:
+        readRoot: 'C:/REPLACE/project'
+        nodeExecutable: 'C:/REPLACE/node.exe'
+        npmCliPath: 'C:/REPLACE/node_modules/npm/bin/npm-cli.js'
+        requireFullEnforcement: true
